@@ -1,0 +1,6 @@
+.idea
+target
+xmpp-sonar-plugin.iml
+.project
+.classpath
+bin
