@@ -9,6 +9,12 @@
     <packaging>sonar-plugin</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
+    <properties>
+        <sonar.buildVersion>2.14</sonar.buildVersion>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jdk.min.version>1.5</jdk.min.version>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -20,16 +26,31 @@
                     <pluginClass>pl.kpc.sonar.xmpp.XMPPPlugin</pluginClass>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <source>${jdk.min.version}</source>
+                    <target>${jdk.min.version}</target>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
-                <dependencies>
-                    <dependency>
-
-                        <groupId>org.codehaus.sonar</groupId>
-                        <artifactId>sonar-plugin-api</artifactId>
-                        <version>2.14</version>
-                        <scope>provided</scope>
-                    </dependency>
-                </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.codehaus.sonar</groupId>
+            <artifactId>sonar-plugin-api</artifactId>
+            <version>${sonar.buildVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- unit tests -->
+        <dependency>
+            <groupId>org.codehaus.sonar</groupId>
+            <artifactId>sonar-testing-harness</artifactId>
+            <version>${sonar.buildVersion}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
