@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.notifications.Notification;
 import org.sonar.api.notifications.NotificationChannel;
+import org.sonar.plugins.xmpp.config.IncompleteXmppConfigurationException;
+import org.sonar.plugins.xmpp.config.ServerXmppConfiguration;
 import org.sonar.plugins.xmpp.config.UserXmppConfiguration;
 import org.sonar.plugins.xmpp.config.XmppConfigurationFinder;
 import org.sonar.plugins.xmpp.gateway.XmppGateway;
@@ -13,6 +15,7 @@ import org.sonar.plugins.xmpp.message.XmppMessageFactory;
 
 public class XmppNotificationChannel extends NotificationChannel {
     private static final Logger LOG = LoggerFactory.getLogger(XmppNotificationChannel.class);
+
     private XmppConfigurationFinder configurationFinder;
     private XmppMessageFactory messageFactory;
     private XmppGatewayFactory gatewayFactory;
@@ -26,25 +29,23 @@ public class XmppNotificationChannel extends NotificationChannel {
     @Override
     public void deliver(Notification notification, String userName) {
 
-        String address = getUserXmppAddress(userName);
-        if (address == null) {
-            LOG.info("XMPP address not defined for " + userName);
+        UserXmppConfiguration userConfiguration;
+        ServerXmppConfiguration serverConfiguration;
+        try {
+            userConfiguration = configurationFinder.getUserConfiguration(userName);
+            serverConfiguration = configurationFinder.getServerConfiguration();
+        } catch (IncompleteXmppConfigurationException exception) {
+            LOG.debug("Could not send XMPP notification", exception);
             return;
         }
         LOG.info("XMPP notification for  " + userName);
-        sendNotification(notification, address);
+        sendNotification(notification, serverConfiguration, userConfiguration);
     }
 
-    private void sendNotification(Notification notification, String address) {
-        XmppGateway gateway = gatewayFactory.create(address);
+    private void sendNotification(Notification notification, ServerXmppConfiguration serverConfiguration, UserXmppConfiguration userConfiguration) {
+        XmppGateway gateway = gatewayFactory.create(serverConfiguration);
         XmppMessageContent message = messageFactory.create(notification);
-        gateway.send(message);
-    }
-
-    private String getUserXmppAddress(String userName) {
-        UserXmppConfiguration configuration = configurationFinder.getConfiguration(userName);
-        return configuration.getAddress();
-
+        gateway.send(userConfiguration, message);
     }
 
 }
