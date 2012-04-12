@@ -70,4 +70,13 @@ public class UserAddressFactoryTest {
         addressFactory.extractUserAddress("=fg@qwe.eee,user=jabber@j.com,paul=qwe@asd.zxc", USER_NAME);
     }
 
+    @Test
+    public void shouldThrowExceptionWhenUserNotPresentOnList() throws IncompleteXmppConfigurationException {
+        thrown.expect(IncompleteXmppConfigurationException.class);
+        thrown.expectMessage(UserAddressFactory.MSG_MALFORMED_LIST_OF_RECEIVERS + ": missing address for user " + USER_NAME);
+
+        UserAddressFactory addressFactory = new UserAddressFactory();
+        addressFactory.extractUserAddress("bob=robert@s1.pl,user3=jabber@j.com,paul=qwe@asd.zxc", USER_NAME);
+    }
+
 }
