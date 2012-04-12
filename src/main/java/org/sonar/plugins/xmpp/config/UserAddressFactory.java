@@ -5,7 +5,7 @@ import org.apache.commons.lang.StringUtils;
 /**
  * Utility class for extracting user address from global configuration.
  */
-public class UserAddressFactory {
+class UserAddressFactory {
 
     public static final String MSG_MALFORMED_LIST_OF_RECEIVERS = "Invalid XMPP configuration, please check receivers address assignment format.";
 
@@ -19,7 +19,7 @@ public class UserAddressFactory {
      * @param userName    name of user whose address should be extracted.
      * @return address of the user.
      * @throws IncompleteXmppConfigurationException
-     *          on problems with malformed list of recivers.
+     *          on problems with malformed list of receivers.
      */
     String extractUserAddress(String allAdresses, String userName) throws IncompleteXmppConfigurationException {
         checkEmptyFullList(allAdresses);
