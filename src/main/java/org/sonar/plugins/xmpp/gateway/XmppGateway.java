@@ -21,6 +21,7 @@ public class XmppGateway {
     }
 
     XmppGateway(Connection connection, ServerXmppConfiguration serverConfiguration) {
+        this.connection = connection;
         String userName = serverConfiguration.getUserName();
         String password = serverConfiguration.getPassword();
         try {
@@ -47,7 +48,7 @@ public class XmppGateway {
             throw new XmppConnectionException(e);
         }
 
-        LOG.debug("Sent XMPP message: " + notification.getText());
+        LOG.debug("Sent XMPP message: " + notification.getText() + " to " + receiverAddress);
     }
 
     public void close() {
