@@ -40,12 +40,14 @@ public class XmppNotificationChannel extends NotificationChannel {
         }
         LOG.info("XMPP notification for  " + userName);
         sendNotification(notification, serverConfiguration, userConfiguration);
+
     }
 
     private void sendNotification(Notification notification, ServerXmppConfiguration serverConfiguration, UserXmppConfiguration userConfiguration) {
         XmppGateway gateway = gatewayFactory.create(serverConfiguration);
         XmppMessageContent message = messageFactory.create(notification);
         gateway.send(userConfiguration, message);
+        gateway.close();
     }
 
 }

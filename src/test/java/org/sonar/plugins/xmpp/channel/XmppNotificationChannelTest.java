@@ -65,6 +65,7 @@ public class XmppNotificationChannelTest {
         verify(messageFactory, times(1)).create(notification);
         verify(gatewayFactory, times(1)).create(serverConfiguration);
         verify(gateway, times(1)).send(configuration, message);
+        verify(gateway, times(1)).close();
     }
 
 
