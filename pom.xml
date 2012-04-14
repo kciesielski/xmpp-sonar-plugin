@@ -36,26 +36,6 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
-            <!--  <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>gwt-maven-plugin</artifactId>
-                <version>1.2</version>
-                <executions>
-                    <execution>
-                        <configuration>
-                            <modules>
-                                <module>org.sonar.plugins.xmpp.view.ConfigPage</module>
-
-                            </modules>
-                            <webappDirectory>${project.build.directory}/classes</webappDirectory>
-                            <extraJvmArgs>-Xmx512m</extraJvmArgs>
-                        </configuration>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
         </plugins>
     </build>
 
@@ -67,40 +47,20 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.codehaus.sonar</groupId>
-            <artifactId>sonar-gwt-api</artifactId>
-            <version>${sonar.buildVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-            <version>2.0.3</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-incubator</artifactId>
-            <version>2.0.1</version>
-            <scope>provided</scope>
-        </dependency>
 
-        <!-- XMPP lib -->
+        <!-- XMPP libs -->
         <dependency>
             <groupId>org.igniterealtime.smack</groupId>
             <artifactId>smack</artifactId>
             <version>3.2.1</version>
-
         </dependency>
         <dependency>
             <groupId>org.igniterealtime.smack</groupId>
             <artifactId>smackx</artifactId>
             <version>3.2.1</version>
-
         </dependency>
-        <!-- unit tests -->
 
+        <!-- unit tests -->
         <dependency>
             <groupId>org.codehaus.sonar</groupId>
             <artifactId>sonar-testing-harness</artifactId>
