@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.plugins.xmpp.config.ServerXmppConfiguration;
 import org.sonar.plugins.xmpp.config.UserXmppConfiguration;
+import org.sonar.plugins.xmpp.config.XmppConstants;
 import org.sonar.plugins.xmpp.gateway.XmppConnectionException;
 import org.sonar.plugins.xmpp.message.XmppMessage;
 
@@ -60,6 +61,6 @@ class SmackXmppGateway implements XmppGateway {
         String userName = serverConfiguration.getUserName();
         String password = serverConfiguration.getPassword();
         connection.connect();
-        connection.login(userName, password);
+        connection.login(userName, password, XmppConstants.XMPP_RESOURCE);
     }
 }

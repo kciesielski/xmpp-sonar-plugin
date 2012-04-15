@@ -7,13 +7,16 @@
     <groupId>org.sonar.plugins</groupId>
     <artifactId>xmpp-sonar-plugin</artifactId>
     <packaging>sonar-plugin</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <properties>
         <sonar.buildVersion>2.14</sonar.buildVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jdk.min.version>1.5</jdk.min.version>
     </properties>
+
+    <name>Sonar :: Plugins :: XMPP Notifications</name>
+    <description>XMPP Notifications</description>
 
     <build>
         <plugins>
@@ -23,6 +26,7 @@
                 <version>1.1</version>
                 <extensions>true</extensions>
                 <configuration>
+                    <pluginName>XMPP Notifications</pluginName>
                     <pluginClass>org.sonar.plugins.xmpp.XmppPlugin</pluginClass>
                 </configuration>
             </plugin>

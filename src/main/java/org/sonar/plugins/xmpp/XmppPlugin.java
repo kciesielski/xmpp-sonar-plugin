@@ -18,7 +18,7 @@ import java.util.List;
                 key = XmppConstants.XMPP_SERVER_PROPERTY,
                 defaultValue = "localhost",
                 name = "XMPP Server host",
-                description = "d",
+                description = "Hostname of the XMPP server",
                 global = true),
         @Property(
                 key = XmppConstants.XMPP_SONAR_USER_PROPERTY,
