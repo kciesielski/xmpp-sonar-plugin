@@ -6,8 +6,8 @@ import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.xmpp.channel.XmppNotificationChannel;
 import org.sonar.plugins.xmpp.config.XmppConfigurationFinder;
 import org.sonar.plugins.xmpp.config.XmppConstants;
-import org.sonar.plugins.xmpp.gateway.XmppGatewayFactory;
-import org.sonar.plugins.xmpp.message.XmppMessageFactory;
+import org.sonar.plugins.xmpp.gateway.smack.SmackXmppGatewayFactory;
+import org.sonar.plugins.xmpp.message.SimpleXmppMessageFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -43,7 +43,7 @@ public class XmppPlugin extends SonarPlugin {
     public List getExtensions() {
         return Arrays.asList(XmppNotificationChannel.class,
 
-                XmppConfigurationFinder.class, XmppGatewayFactory.class, XmppMessageFactory.class);
+                XmppConfigurationFinder.class, SmackXmppGatewayFactory.class, SimpleXmppMessageFactory.class);
     }
 
 }

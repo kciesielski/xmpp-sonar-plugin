@@ -1,13 +1,14 @@
 package org.sonar.plugins.xmpp.message;
 
-public class XmppMessageContent {
+class SimpleXmppMessage implements XmppMessage {
     private String text;
 
-    public XmppMessageContent(String text) {
+    public SimpleXmppMessage(String text) {
         this.text = text;
     }
 
     public String getText() {
+
         return text;
     }
 }

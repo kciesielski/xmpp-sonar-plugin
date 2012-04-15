@@ -8,9 +8,9 @@ import org.sonar.plugins.xmpp.config.IncompleteXmppConfigurationException;
 import org.sonar.plugins.xmpp.config.ServerXmppConfiguration;
 import org.sonar.plugins.xmpp.config.UserXmppConfiguration;
 import org.sonar.plugins.xmpp.config.XmppConfigurationFinder;
-import org.sonar.plugins.xmpp.gateway.XmppGateway;
 import org.sonar.plugins.xmpp.gateway.XmppGatewayFactory;
-import org.sonar.plugins.xmpp.message.XmppMessageContent;
+import org.sonar.plugins.xmpp.gateway.smack.XmppGateway;
+import org.sonar.plugins.xmpp.message.XmppMessage;
 import org.sonar.plugins.xmpp.message.XmppMessageFactory;
 
 public class XmppNotificationChannel extends NotificationChannel {
@@ -45,9 +45,8 @@ public class XmppNotificationChannel extends NotificationChannel {
 
     private void sendNotification(Notification notification, ServerXmppConfiguration serverConfiguration, UserXmppConfiguration userConfiguration) {
         XmppGateway gateway = gatewayFactory.create(serverConfiguration);
-        XmppMessageContent message = messageFactory.create(notification);
+        XmppMessage message = messageFactory.create(notification);
         gateway.send(userConfiguration, message);
-        gateway.close();
     }
 
 }

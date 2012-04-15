@@ -13,6 +13,7 @@ public class ServerXmppConfiguration {
     }
 
     public String getTargetAddress() {
+
         return targetAddress;
     }
 

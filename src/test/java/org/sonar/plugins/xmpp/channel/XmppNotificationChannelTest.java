@@ -7,9 +7,9 @@ import org.sonar.plugins.xmpp.config.IncompleteXmppConfigurationException;
 import org.sonar.plugins.xmpp.config.ServerXmppConfiguration;
 import org.sonar.plugins.xmpp.config.UserXmppConfiguration;
 import org.sonar.plugins.xmpp.config.XmppConfigurationFinder;
-import org.sonar.plugins.xmpp.gateway.XmppGateway;
 import org.sonar.plugins.xmpp.gateway.XmppGatewayFactory;
-import org.sonar.plugins.xmpp.message.XmppMessageContent;
+import org.sonar.plugins.xmpp.gateway.smack.XmppGateway;
+import org.sonar.plugins.xmpp.message.XmppMessage;
 import org.sonar.plugins.xmpp.message.XmppMessageFactory;
 
 import static org.mockito.Mockito.*;
@@ -23,7 +23,7 @@ public class XmppNotificationChannelTest {
     Notification notification;
     ServerXmppConfiguration serverConfiguration;
     XmppGateway gateway;
-    XmppMessageContent message;
+    XmppMessage message;
 
     @Before
     public void init() {
@@ -33,7 +33,7 @@ public class XmppNotificationChannelTest {
 
         notification = mock(Notification.class);
         gateway = mock(XmppGateway.class);
-        message = mock(XmppMessageContent.class);
+        message = mock(XmppMessage.class);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class XmppNotificationChannelTest {
         XmppNotificationChannel channel = new XmppNotificationChannel(configFinder, messageFactory, gatewayFactory);
         channel.deliver(notification, USER);
 
-        verify(configFinder, times(1)).getUserConfiguration(USER);
+        verify(configFinder).getUserConfiguration(USER);
         verify(messageFactory, never()).create(any(Notification.class));
         verify(gatewayFactory, never()).create(any(ServerXmppConfiguration.class));
     }
@@ -61,11 +61,10 @@ public class XmppNotificationChannelTest {
         XmppNotificationChannel channel = new XmppNotificationChannel(configFinder, messageFactory, gatewayFactory);
         channel.deliver(notification, USER);
 
-        verify(configFinder, times(1)).getUserConfiguration(USER);
-        verify(messageFactory, times(1)).create(notification);
-        verify(gatewayFactory, times(1)).create(serverConfiguration);
-        verify(gateway, times(1)).send(configuration, message);
-        verify(gateway, times(1)).close();
+        verify(configFinder).getUserConfiguration(USER);
+        verify(messageFactory).create(notification);
+        verify(gatewayFactory).create(serverConfiguration);
+        verify(gateway).send(configuration, message);
     }
 
 

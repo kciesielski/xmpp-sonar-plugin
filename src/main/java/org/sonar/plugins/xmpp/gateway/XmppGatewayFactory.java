@@ -1,11 +1,11 @@
 package org.sonar.plugins.xmpp.gateway;
 
+
 import org.sonar.api.ServerExtension;
 import org.sonar.plugins.xmpp.config.ServerXmppConfiguration;
+import org.sonar.plugins.xmpp.gateway.smack.XmppGateway;
 
-public class XmppGatewayFactory implements ServerExtension {
+public interface XmppGatewayFactory extends ServerExtension {
 
-    public XmppGateway create(ServerXmppConfiguration serverConfiguration) {
-        return new XmppGateway(serverConfiguration);
-    }
+    XmppGateway create(ServerXmppConfiguration serverConfiguration);
 }

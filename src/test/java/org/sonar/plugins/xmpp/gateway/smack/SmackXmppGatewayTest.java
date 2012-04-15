@@ -1,4 +1,4 @@
-package org.sonar.plugins.xmpp.gateway;
+package org.sonar.plugins.xmpp.gateway.smack;
 
 import org.jivesoftware.smack.*;
 import org.junit.Rule;
@@ -6,11 +6,12 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.sonar.plugins.xmpp.config.ServerXmppConfiguration;
 import org.sonar.plugins.xmpp.config.UserXmppConfiguration;
-import org.sonar.plugins.xmpp.message.XmppMessageContent;
+import org.sonar.plugins.xmpp.gateway.XmppConnectionException;
+import org.sonar.plugins.xmpp.message.XmppMessage;
 
 import static org.mockito.Mockito.*;
 
-public class XmppGatewayTest {
+public class SmackXmppGatewayTest {
 
     private static final String AUTHENTICATION_EXCEPTION = "Authentication exception";
     private static final String SENDING_EXCEPTION = "Sending exception";
@@ -18,6 +19,7 @@ public class XmppGatewayTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
 
     @Test
     public void throwsExceptionOnConnectionError() throws XMPPException {
@@ -29,7 +31,13 @@ public class XmppGatewayTest {
         thrown.expect(XmppConnectionException.class);
         thrown.expectMessage(CONNECTION_EXCEPTION);
 
-        new XmppGateway(connection, configuration);
+        UserXmppConfiguration userConfiguration = mock(UserXmppConfiguration.class);
+        when(userConfiguration.getAddress()).thenReturn("receiver@server.com");
+        XmppMessage message = mock(XmppMessage.class);
+
+        new SmackXmppGateway(connection, configuration).send(userConfiguration, message);
+
+        verify(connection).disconnect();
     }
 
     @Test
@@ -42,7 +50,13 @@ public class XmppGatewayTest {
         thrown.expect(XmppConnectionException.class);
         thrown.expectMessage(AUTHENTICATION_EXCEPTION);
 
-        new XmppGateway(connection, configuration);
+        UserXmppConfiguration userConfiguration = mock(UserXmppConfiguration.class);
+        when(userConfiguration.getAddress()).thenReturn("receiver@server.com");
+        XmppMessage message = mock(XmppMessage.class);
+
+        new SmackXmppGateway(connection, configuration).send(userConfiguration, message);
+
+        verify(connection).disconnect();
     }
 
     @Test
@@ -58,21 +72,12 @@ public class XmppGatewayTest {
         thrown.expect(XmppConnectionException.class);
         thrown.expectMessage(SENDING_EXCEPTION);
 
-        XmppMessageContent message = mock(XmppMessageContent.class);
+        XmppMessage message = mock(XmppMessage.class);
         when(message.getText()).thenReturn("text");
         UserXmppConfiguration userConfiguration = mock(UserXmppConfiguration.class);
         when(userConfiguration.getAddress()).thenReturn("receiver@server.com");
 
-        new XmppGateway(connection, configuration).send(userConfiguration, message);
-    }
-
-    @Test
-    public void shouldCloseInternalResource() {
-        XMPPConnection connection = mock(XMPPConnection.class);
-        ServerXmppConfiguration configuration = mock(ServerXmppConfiguration.class);
-
-        new XmppGateway(connection, configuration).close();
-
+        new SmackXmppGateway(connection, configuration).send(userConfiguration, message);
         verify(connection, times(1)).disconnect();
     }
 
@@ -86,14 +91,15 @@ public class XmppGatewayTest {
         when(chatManager.createChat(anyString(), any(MessageListener.class))).thenReturn(chat);
         ServerXmppConfiguration configuration = mock(ServerXmppConfiguration.class);
 
-        XmppMessageContent message = mock(XmppMessageContent.class);
+        XmppMessage message = mock(XmppMessage.class);
         when(message.getText()).thenReturn("text");
         UserXmppConfiguration userConfiguration = mock(UserXmppConfiguration.class);
         when(userConfiguration.getAddress()).thenReturn("receiver@server.com");
 
-        new XmppGateway(connection, configuration).send(userConfiguration, message);
+        new SmackXmppGateway(connection, configuration).send(userConfiguration, message);
 
-        verify(chat, times(1)).sendMessage("text");
+        verify(chat).sendMessage("text");
+        verify(connection).disconnect();
     }
 
 }
