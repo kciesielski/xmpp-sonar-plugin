@@ -1,0 +1,28 @@
+1. Installaiton
+Plugin requires Sonar 2.14 or newer
+
+Copy the .jar file to your Sonar plugins directory, for example:
+
+sonar-2.14/extensions/plugins/xmpp-sonar-plugin.jar
+
+Restart Sonar
+
+2. Global Configuration
+
+Log in as administrator and go to General Settings > XMPP Notifications
+
+Configure all the fields according to hints and examples on their settings screen.
+
+Select "Save XMPP Notifications settings"
+
+3. User Configuration
+
+Go to My Profile
+
+In "Notifications" section mark all the events that you want to be notified about.
+Make sure that you market your favourite projects on the Home screen to make some events reach you.
+
+4. Troubleshooting
+
+Please make sure that your XMPP server is reachable from Sonar machine.
+The plugin hasn't been testen with XMPP servers using encryption or connected via proxy.
