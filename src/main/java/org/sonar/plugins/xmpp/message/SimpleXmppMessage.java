@@ -8,7 +8,6 @@ class SimpleXmppMessage implements XmppMessage {
     }
 
     public String getText() {
-
         return text;
     }
 }

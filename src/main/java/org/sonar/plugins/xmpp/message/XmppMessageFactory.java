@@ -5,4 +5,6 @@ import org.sonar.api.notifications.Notification;
 
 public interface XmppMessageFactory extends ServerExtension {
     XmppMessage create(Notification notification);
+
+    boolean matches(Notification notification);
 }
