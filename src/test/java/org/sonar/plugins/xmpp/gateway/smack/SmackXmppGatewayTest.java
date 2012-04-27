@@ -44,9 +44,11 @@ public class SmackXmppGatewayTest {
     public void throwsExceptionOnAuthenticationError() throws XMPPException {
 
         XMPPConnection connection = mock(XMPPConnection.class);
-        doThrow(new XMPPException(AUTHENTICATION_EXCEPTION)).when(connection).login(anyString(), anyString());
+        doThrow(new XMPPException(AUTHENTICATION_EXCEPTION)).when(connection).login(anyString(), anyString(), anyString());
 
         ServerXmppConfiguration configuration = mock(ServerXmppConfiguration.class);
+        when(configuration.getUserName()).thenReturn("user");
+        when(configuration.getPassword()).thenReturn("password");
         thrown.expect(XmppConnectionException.class);
         thrown.expectMessage(AUTHENTICATION_EXCEPTION);
 
@@ -78,7 +80,7 @@ public class SmackXmppGatewayTest {
         when(userConfiguration.getAddress()).thenReturn("receiver@server.com");
 
         new SmackXmppGateway(connection, configuration).send(userConfiguration, message);
-        verify(connection, times(1)).disconnect();
+        verify(connection).disconnect();
     }
 
     @Test
