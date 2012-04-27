@@ -1,5 +1,5 @@
 1. Installaiton
-Plugin requires Sonar 2.14 or newer
+Plugin requires Sonar 3.0 or newer
 
 Copy the .jar file to your Sonar plugins directory, for example:
 
