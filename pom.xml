@@ -10,7 +10,7 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
-        <sonar.buildVersion>2.14</sonar.buildVersion>
+        <sonar.buildVersion>3.0</sonar.buildVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jdk.min.version>1.5</jdk.min.version>
     </properties>

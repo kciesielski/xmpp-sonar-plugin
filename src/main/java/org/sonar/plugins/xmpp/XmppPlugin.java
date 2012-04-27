@@ -2,6 +2,7 @@ package org.sonar.plugins.xmpp;
 
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
+import org.sonar.api.PropertyType;
 import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.xmpp.channel.XmppNotificationChannel;
 import org.sonar.plugins.xmpp.config.XmppConfigurationFinder;
@@ -34,6 +35,7 @@ import java.util.List;
                 global = true),
         @Property(
                 key = XmppConstants.XMPP_PASSWORD_PROPERTY,
+                type = PropertyType.PASSWORD,
                 name = "Password",
                 defaultValue = "",
                 description = "Password for Sonar user on the XMPP server",
