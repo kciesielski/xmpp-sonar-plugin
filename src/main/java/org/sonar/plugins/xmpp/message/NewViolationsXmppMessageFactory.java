@@ -7,7 +7,7 @@ import org.sonar.api.notifications.Notification;
 
 public class NewViolationsXmppMessageFactory implements XmppMessageFactory {
 
-    Configuration configuration;
+    private Configuration configuration;
 
     public NewViolationsXmppMessageFactory(Configuration configuration) {
         this.configuration = configuration;
