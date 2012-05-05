@@ -17,8 +17,26 @@
 
     <name>Sonar :: Plugins :: XMPP Notifications</name>
     <description>XMPP Notifications</description>
-
+    <url>https://github.com/kciesielski/xmpp-sonar-plugin</url>
+    <inceptionYear>2012</inceptionYear>
+    <licenses>
+        <license>
+            <name>GNU Lesser General Public License (LGPL), v.3</name>
+            <url>http://www.gnu.org/licenses/lgpl.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <organization>
+        <name>Krzysztof Ciesielski</name>
+        <url>https://github.com/kciesielski/</url>
+    </organization>
+    <scm>
+        <connection>scm:git:git://github.com/kciesielski/xmpp-sonar-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:kciesielski/xmpp-sonar-plugin.git</developerConnection>
+        <url>https://github.com/kciesielski/xmpp-sonar-plugin</url>
+    </scm>
     <build>
+
         <plugins>
             <plugin>
                 <groupId>org.codehaus.sonar</groupId>

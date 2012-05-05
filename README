@@ -1,19 +1,22 @@
-1. Installaiton
+XMPP Sonar Plugin
+=================
+
+1. Installation
 Plugin requires Sonar 3.0 or newer
 
 Copy the .jar file to your Sonar plugins directory, for example:
 
-sonar-2.14/extensions/plugins/xmpp-sonar-plugin.jar
+sonar-3.0/extensions/plugins/xmpp-sonar-plugin.jar
 
 Restart Sonar
 
 2. Global Configuration
 
-Log in as administrator and go to General Settings > XMPP Notifications
+Log in as administrator and go to General Settings > XMPP
 
 Configure all the fields according to hints and examples on their settings screen.
 
-Select "Save XMPP Notifications settings"
+Select "Save XMPP settings"
 
 3. User Configuration
 
