@@ -9,13 +9,13 @@ class UserAddressFactory {
 
     public static final String MSG_MALFORMED_LIST_OF_RECEIVERS = "Invalid XMPP configuration, please check receivers address assignment format.";
 
-    private static final String SEPARATOR = ",";
+    private static final String SEPARATOR = ";";
     private static final String USER_ADDRESS_SEPARATOR = "=";
 
     /**
      * Parses global configuration to extract XMPP address for given user name.
      *
-     * @param allAdresses list of all addresses in format: "user=address@server.domain,user2=adress2@server2.domain2"
+     * @param allAdresses list of all addresses in format: "user=address@server.domain;user2=adress2@server2.domain2"
      * @param userName    name of user whose address should be extracted.
      * @return address of the user.
      * @throws IncompleteXmppConfigurationException

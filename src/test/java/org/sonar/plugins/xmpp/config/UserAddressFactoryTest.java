@@ -40,14 +40,14 @@ public class UserAddressFactoryTest {
         thrown.expectMessage(UserAddressFactory.MSG_MALFORMED_LIST_OF_RECEIVERS + ": incorrect asignment: dirt");
 
         UserAddressFactory addressFactory = new UserAddressFactory();
-        addressFactory.extractUserAddress("user2=jabber@j.com,dirt", USER_NAME);
+        addressFactory.extractUserAddress("user2=jabber@j.com;dirt", USER_NAME);
     }
 
     @Test
     public void shouldReturnAddressForUserPresentOnWellFormedList() throws IncompleteXmppConfigurationException {
 
         UserAddressFactory addressFactory = new UserAddressFactory();
-        String address = addressFactory.extractUserAddress("bob=robert@s1.pl,user=jabber@j.com,paul=qwe@asd.zxc", USER_NAME);
+        String address = addressFactory.extractUserAddress("bob=robert@s1.pl;user=jabber@j.com;paul=qwe@asd.zxc", USER_NAME);
 
         Assert.assertEquals("jabber@j.com", address);
     }
@@ -58,7 +58,7 @@ public class UserAddressFactoryTest {
         thrown.expectMessage(UserAddressFactory.MSG_MALFORMED_LIST_OF_RECEIVERS);
 
         UserAddressFactory addressFactory = new UserAddressFactory();
-        addressFactory.extractUserAddress("bob=,user=jabber@j.com,paul=qwe@asd.zxc", USER_NAME);
+        addressFactory.extractUserAddress("bob=;user=jabber@j.com;paul=qwe@asd.zxc", USER_NAME);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class UserAddressFactoryTest {
         thrown.expectMessage(UserAddressFactory.MSG_MALFORMED_LIST_OF_RECEIVERS);
 
         UserAddressFactory addressFactory = new UserAddressFactory();
-        addressFactory.extractUserAddress("=fg@qwe.eee,user=jabber@j.com,paul=qwe@asd.zxc", USER_NAME);
+        addressFactory.extractUserAddress("=fg@qwe.eee;user=jabber@j.com;paul=qwe@asd.zxc", USER_NAME);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class UserAddressFactoryTest {
         thrown.expectMessage(UserAddressFactory.MSG_MALFORMED_LIST_OF_RECEIVERS + ": missing address for user " + USER_NAME);
 
         UserAddressFactory addressFactory = new UserAddressFactory();
-        addressFactory.extractUserAddress("bob=robert@s1.pl,user3=jabber@j.com,paul=qwe@asd.zxc", USER_NAME);
+        addressFactory.extractUserAddress("bob=robert@s1.pl;user3=jabber@j.com;paul=qwe@asd.zxc", USER_NAME);
     }
 
 }

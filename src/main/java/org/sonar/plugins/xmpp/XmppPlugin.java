@@ -31,7 +31,7 @@ import java.util.List;
                 key = XmppConstants.XMPP_USER_ADDRESSES,
                 defaultValue = "",
                 name = "User addresses",
-                description = "Comma-separated list of user XMPP adresses. Example: john=johndoe@jabber.com,ann=annrice@someserver.com",
+                description = "Semicolon-separated list of user XMPP adresses. Example: john=johndoe@jabber.com;ann=annrice@someserver.com",
                 global = true),
         @Property(
                 key = XmppConstants.XMPP_PASSWORD_PROPERTY,
